@@ -1,0 +1,9 @@
+﻿.film{
+    height : 600px;
+    width : 400px;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr [col-start]);
+}

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<TP3.Models.ModelFilm> 
+
+@{
+
+    ViewBag.Title = "Liste de tous les films";
+
+}
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+<h3>@ViewBag.Message</h3>
+
+
+<!-- Css Grid de films -->
+<div>
+    <div class="container-fluid content-row">
+        <div class="row hidden-md-up">
+
+            <!-- Film elements de grid -->
+            @foreach (TP3.Models.ModelFilm film in Model)
+            {
+                <div class="col-sm-4 py-1">
+                    <div class="card">
+                        <h6 class="card-header text-center" style="font-size:15px">@film.Titre</h6>
+
+                        <div class="row no-gutters">
+                            <!-- Image de Couverture -->
+                            <div class="col">
+                                <img src="@film.Image" class="img-fluid">
+                            </div>
+                            <div class="col">
+                                <div class="card-body overflow-auto" style="height: 250px">
+                                    <p class="card-text ">@film.Description</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer">
+                            <small>
+                                <a href="@Url.Action("Film", "Home", new { id = film.Id })">Plus d'info</a>
+                                <a href="@Url.Action("Favori", "Home", new{ id = film.Id, location = "MaListe"})" onload="" onclick="changement(this)" class="fa fa-trash float-right"></a>
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

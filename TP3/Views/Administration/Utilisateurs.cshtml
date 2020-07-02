@@ -1,0 +1,29 @@
+﻿@using TP3.Models;
+@model IEnumerable<ApplicationUser>
+
+@{
+    ViewBag.Title = "All Users";
+}
+
+<h1>All Users</h1>
+
+@if (Model.Any())
+{
+    <a href="@Url.Action("UserCreate", "Administration")" class="btn btn-primary mb-3">Ajouter un utilisateur</a>
+
+    foreach (var user in Model)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
+                User Id : @user.Id
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@user.UserName</h5>
+            </div>
+            <div class="card-footer">
+                <a href="@Url.Action("UserEdit", "Administration", new { id = user.Id })" class="btn btn-primary">Edit</a>
+                <a href="@Url.Action("UserDelete", "Administration", new { id = user.Id })" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    }
+}

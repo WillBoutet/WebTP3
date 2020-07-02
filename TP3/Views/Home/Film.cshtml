@@ -1,0 +1,18 @@
+﻿@using TP3
+@{
+    ViewBag.Title = "Film";
+}
+
+<div class="card m-2" style="width: 100%; display: inline-block;">
+    <div class="card-body text-center">
+        <div>
+            <img style="width: 20%; height: auto" class="film float-left" src="@ViewBag.Filme.Image" alt="Second slide">
+            <h1 class="card-title">@ViewBag.Filme.Titre</h1>
+            <p class="card-text">@ViewBag.Filme.Description</p>
+            <p class="card-text">Producteur : @ViewBag.Filme.Producteur</p>
+            <p class="card-text">Acteur principal : @ViewBag.Filme.Acteur</p>
+            <iframe width="560" height="315" src="@ViewBag.Filme.Url" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+

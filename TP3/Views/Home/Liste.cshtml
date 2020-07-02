@@ -1,0 +1,98 @@
+﻿@model IEnumerable<TP3.Models.ModelFilm>
+
+@{
+    ViewBag.Title = "Liste";
+
+}
+
+<script>
+    function changement(x) {
+        if (x.classList.contains("fa-heart")) {
+            x.classList.remove("fa-heart");
+            x.classList.add("fa-heart-o");
+        }
+        else {
+            x.classList.remove("fa-heart-o");
+            x.classList.add("fa-heart");
+        }
+    }
+
+    function onload() {
+
+    }
+</script>
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type="text/css" rel="stylesheet">
+
+<!-- Titre de la page -->
+<h3>@ViewBag.Message</h3>
+
+
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    if (User.IsInRole("Admin"))
+    {
+        <!-- Ajout de films -->
+        <hr>
+        <div id="addFilm"></div>
+        <button class="btn btn-primary" onclick="showAddFilm()">Nouveau Film</button>
+
+
+        <script>
+    function showAddFilm() {
+        $.ajax({
+            url: "@Url.Action("AddFilm", "Home")",
+                success: function (result) {
+                $("#addFilm").html(result);
+            }
+        });
+    }
+        </script>
+
+    }
+}
+
+<!-- Css Grid de films -->
+<div>
+    <div class="container-fluid content-row">
+        <div class="row hidden-md-up">
+
+            <!-- Film elements de grid -->
+            @foreach (TP3.Models.ModelFilm film in Model)
+            {
+                <div class="col-sm-4 py-1" style="height: 400px">
+
+                    <div class="card">
+                        <h6 class="card-header text-center" style="font-size:17px">@film.Titre</h6>
+
+                        <div class="row no-gutters" style="height: 250px">
+                            <!-- Image de Couverture -->
+                            <div class="col">
+                                <a href="@Url.Action("Film", "Home", new { id = film.Id })">
+                                    <img src="@film.Image" class="img-fluid">
+                                </a>
+                            </div>
+                            <div class="col">
+                                <div class="card-body overflow-auto" style="height: 250px">
+                                    <p class="card-text ">@film.Description</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="card-footer">
+                            <small>
+                                <a href="@Url.Action("Film", "Home", new { id = film.Id })">Plus d'info</a>
+                                <a href="@Url.Action("Favori", "Home", new{ id = film.Id, location = "Liste"})" onload="" onclick="changement(this)" class="fa fa-heart-o float-right"></a>
+                            </small>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>   
